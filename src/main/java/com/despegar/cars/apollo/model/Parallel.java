@@ -25,7 +25,7 @@ public class Parallel extends Navegable {
 		
 		// Se lanza cada Hilo
 		List<Thread> threads = new LinkedList<Thread>();
-		for(int i = 0; i < parallels.size(); i++){
+		for(int i = 0; i < parallels.size(); i++) {
 			Navegable navegable = parallels.get(i);
 			ThreadFlow threadFlow = new ThreadFlow(flowInstance, navegable);
 			Thread thread = new Thread(threadFlow, "T" + i);
@@ -42,7 +42,7 @@ public class Parallel extends Navegable {
 			}
 		}
 		
-		boolean result = this.next.excecute(flowInstance);
+		boolean result = this.next.process(flowInstance);
 		
 		return result;
 	}

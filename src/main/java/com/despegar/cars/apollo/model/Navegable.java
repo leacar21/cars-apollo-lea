@@ -1,5 +1,7 @@
 package com.despegar.cars.apollo.model;
 
+import java.util.Date;
+
 public abstract class Navegable {
 	
 	private String code;
@@ -20,24 +22,36 @@ public abstract class Navegable {
 	
 	public boolean process(FlowInstance flowInstance) {
 		
+		Date begin = new Date();
+		
 		// Se ejecuta la accion concreta
-		boolean excecute = this.excecute(flowInstance);
+		boolean result = this.excecute(flowInstance);
+		
+		Date end = new Date();
 		
 		// =========== Checkpoint =====================================
 		flowInstance.setActualNavigationCode(this.getCode());
 		
 		FlowHistoryEntry flowHistoryEntry = new FlowHistoryEntry();
+		flowHistoryEntry.setBegin(begin);
+		flowHistoryEntry.setEnd(end);
+		flowHistoryEntry.setResult("" + result);
 		if (flowInstance.getInitialFlowHistoryEntry() == null){
 			flowInstance.setInitialFlowHistoryEntry(flowHistoryEntry);
 		}
 		else{
-			// TODO:  Mando a guardar recursivo
+			FlowHistoryEntry flowHistoryEntryAux = flowInstance.getInitialFlowHistoryEntry();
+			while (flowHistoryEntryAux.getNext() != null){
+				flowHistoryEntryAux = flowHistoryEntryAux.getNext();
+			}
+			flowHistoryEntryAux.setNext(flowHistoryEntry);
 		}
+		
 		// =============================================================
 		
 		// TODO: Salvar estado del Flow en Base
 		
-		return excecute;
+		return result;
 	}
 	
 	protected abstract boolean excecute(FlowInstance flowInstance);

@@ -27,7 +27,7 @@ public class Task extends Navegable {
 		
 		if (excecute){
 			if (this.next != null){
-				excecute = this.next.excecute(flowInstance);
+				excecute = this.next.process(flowInstance);
 			}
 		}
 		

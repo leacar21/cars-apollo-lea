@@ -20,7 +20,7 @@ public class Conditional extends Navegable {
 		for (Case c : listCases) {
 			boolean result = c.getGuardToEvaluate().evaluate(flowInstance);
 			if (result){
-				return c.getNext().excecute(flowInstance);
+				return c.getNext().process(flowInstance);
 			}
 		}
 		

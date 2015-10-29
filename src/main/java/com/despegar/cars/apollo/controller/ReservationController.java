@@ -1,5 +1,6 @@
 package com.despegar.cars.apollo.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,6 +79,13 @@ public class ReservationController {
 		task4.setNext(parallel1);
 		parallel1.setNext(task6);
 		
+		Task previousTask = task6;
+		for (int i = 0; i < 10; i++){
+			Task task = new Task(); task.setCode("TASK_AAA"+i); task.setName("TASK AAA " + i);  task.setAction(exampleAction);
+			previousTask.setNext(task);
+			previousTask = task;
+		}
+		
 		// FLOW
 		Flow flow = new Flow();
 		flow.setName("FLOW_1");
@@ -98,7 +106,13 @@ public class ReservationController {
 		flowInstance.setFlow(flow);
 		flowInstance.setMapVariables(mapVariables);
 		
+		Date dateIni = new Date();
+		
 		flowInstance.getFlow().getInitial().process(flowInstance);
+		
+		Date dateEnd = new Date();
+		
+		System.out.println(dateEnd.getTime() - dateIni.getTime());
 		
 		return "OK";
 	}

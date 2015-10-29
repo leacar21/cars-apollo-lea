@@ -12,7 +12,7 @@ public class ThreadFlow implements Runnable {
 	
 	@Override
 	public void run() {
-		navegable.excecute(flowInstance);
+		navegable.process(flowInstance);
 	}
 
 }
