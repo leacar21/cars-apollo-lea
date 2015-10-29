@@ -18,4 +18,28 @@ public abstract class Navegable {
 		this.name = name;
 	}
 	
+	public boolean process(FlowInstance flowInstance) {
+		
+		// Se ejecuta la accion concreta
+		boolean excecute = this.excecute(flowInstance);
+		
+		// =========== Checkpoint =====================================
+		flowInstance.setActualNavigationCode(this.getCode());
+		
+		FlowHistoryEntry flowHistoryEntry = new FlowHistoryEntry();
+		if (flowInstance.getInitialFlowHistoryEntry() == null){
+			flowInstance.setInitialFlowHistoryEntry(flowHistoryEntry);
+		}
+		else{
+			// TODO:  Mando a guardar recursivo
+		}
+		// =============================================================
+		
+		// TODO: Salvar estado del Flow en Base
+		
+		return excecute;
+	}
+	
+	protected abstract boolean excecute(FlowInstance flowInstance);
+	
 }
