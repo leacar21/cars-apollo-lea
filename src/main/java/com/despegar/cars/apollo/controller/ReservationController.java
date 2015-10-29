@@ -2,6 +2,7 @@ package com.despegar.cars.apollo.controller;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import com.despegar.cars.apollo.model.Flow;
 import com.despegar.cars.apollo.model.FlowInstance;
 import com.despegar.cars.apollo.model.GuardExample1;
 import com.despegar.cars.apollo.model.GuardExample2;
+import com.despegar.cars.apollo.model.Navegable;
+import com.despegar.cars.apollo.model.Parallel;
 import com.despegar.cars.apollo.model.Task;
 import com.despegar.cars.apollo.model.Variable;
 
@@ -52,6 +55,18 @@ public class ReservationController {
 		Task task3A = new Task(); task3A.setCode("TASK_3A"); task3A.setName("TASK 3A");  task3A.setAction(exampleAction);
 		Task task3B = new Task(); task3B.setCode("TASK_3B"); task3B.setName("TASK 3B");  task3B.setAction(exampleAction);
 		Task task4 = new Task(); task4.setCode("TASK_4"); task4.setName("TASK 4");  task4.setAction(exampleAction);
+		Task task51 = new Task(); task51.setCode("TASK_51"); task51.setName("TASK 51");  task51.setAction(exampleAction);
+		Task task52 = new Task(); task52.setCode("TASK_52"); task52.setName("TASK 52");  task52.setAction(exampleAction);
+		Task task53 = new Task(); task53.setCode("TASK_53"); task53.setName("TASK 53");  task53.setAction(exampleAction);
+		Task task6 = new Task(); task6.setCode("TASK_6"); task6.setName("TASK 6");  task6.setAction(exampleAction);
+		
+		// PARALLELS
+		Parallel parallel1 = new Parallel(); parallel1.setCode("PARALLEL1"); parallel1.setName("PARALLEL 1");
+		List<Navegable> listNavegables1 = new LinkedList<Navegable>();
+		listNavegables1.add(task51);
+		listNavegables1.add(task52);
+		listNavegables1.add(task53);
+		parallel1.setParallels(listNavegables1);
 		
 		// TRANSITIONS
 		task1.setNext(task2);
@@ -60,6 +75,8 @@ public class ReservationController {
 		conditionalCase2.setNext(task3B);
 		task3A.setNext(task4);
 		task3B.setNext(task4);
+		task4.setNext(parallel1);
+		parallel1.setNext(task6);
 		
 		// FLOW
 		Flow flow = new Flow();
