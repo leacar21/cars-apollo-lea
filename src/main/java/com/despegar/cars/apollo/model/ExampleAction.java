@@ -9,7 +9,7 @@ public class ExampleAction implements IAction {
 		System.out.println(name);
 		
 		Map<String, Variable> mapVariables = flowInstance.getMapVariables();
-		mapVariables.get("VARIABLE_1").setValue("JOJO");
+		mapVariables.get("VARIABLE_1").setValue("OK");
 		
 		return true;
 	}

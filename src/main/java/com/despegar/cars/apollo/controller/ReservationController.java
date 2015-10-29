@@ -34,8 +34,8 @@ public class ReservationController {
 		GuardExample2 guardExample2 = new GuardExample2();
 		
 		// CASES
-		Case conditionalCase1 = new Case(); conditionalCase1.setGuardToEvaluate(guardExample1);
-		Case conditionalCase2 = new Case(); conditionalCase2.setGuardToEvaluate(guardExample2);
+		Case conditionalCase1 = new Case(); conditionalCase1.setGuardToEvaluate(guardExample1); conditionalCase1.setCode("CASE1"); conditionalCase1.setName("CASE 1");
+		Case conditionalCase2 = new Case(); conditionalCase2.setGuardToEvaluate(guardExample2); conditionalCase2.setCode("CASE2"); conditionalCase2.setName("CASE 2");
 		LinkedList<Case> listCases = new LinkedList<Case>();
 		listCases.add(conditionalCase2);
 		listCases.add(conditionalCase1);
@@ -43,7 +43,7 @@ public class ReservationController {
 		
 		
 		// CONDITIONALS
-		Conditional conditional1 = new Conditional();
+		Conditional conditional1 = new Conditional(); conditional1.setCode("COND1"); conditional1.setName("Condicion 1");
 		conditional1.setListCases(listCases);
 		
 		// TASKS
